@@ -21,9 +21,7 @@ class Login extends Controller
             $loginModel = $this->model("LoginModel");
             $result = $loginModel->login($username, $password);
             if ($result) {
-                $this->view("content_layout", [
-                    "page" => "admin",
-                ]);
+                header("Location: http://localhost/Assignment2/Admin");
             } else {
                 $this->view("content_layout", [
                     "page" => "about",
