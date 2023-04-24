@@ -42,15 +42,15 @@ $room = $data['room'];
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-5 ftco-animate">
-                <a href="images/menu-2.jpg" class="image-popup"><img src="images/menu-2.jpg" class="img-fluid"
-                        alt="Colorlib Template"></a>
+                <a href="images/menu-2.jpg" class="image-popup"><img src="<?php echo $room['image']; ?>"
+                        class="img-fluid" alt="Colorlib Template"></a>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                 <h3>
-                    <?php echo $room['roomType']; ?>
+                    <?php echo $room['roomName']; ?>
                 </h3>
-                <p class="price"><span>$
-                        <?php echo $room['price']; ?>
+                <p class="price"><span>
+                        <?php echo '$' . $room['price']; ?>
                     </span></p>
                 <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a
                     paradisematic country, in which roasted parts of sentences fly into your mouth.</p>

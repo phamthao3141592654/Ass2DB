@@ -5,16 +5,6 @@ class AdminModel extends Database
     {
         return mysqli_query($this->connect, $sql);
     }
-    // public function getRooms()
-    // {
-    //     $sql = "SELECT * FROM rooms";
-    //     $result = $this->_query($sql);
-    //     $rooms = [];
-    //     while ($row = mysqli_fetch_assoc($result)) {
-    //         $rooms[] = $row;
-    //     }
-    //     return $rooms;
-    // }
     public function getRooms()
     {
         $sql = "SELECT * FROM rooms";
@@ -22,16 +12,6 @@ class AdminModel extends Database
         $rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
         mysqli_free_result($result);
         return $rooms;
-    }
-
-    // get members
-    public function getMembers()
-    {
-        $sql = "SELECT * FROM members";
-        $result = mysqli_query($this->connect, $sql);
-        $members = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        mysqli_free_result($result);
-        return $members;
     }
 
     public function getRoomById($id)
@@ -43,25 +23,25 @@ class AdminModel extends Database
         return $room;
     }
 
-    public function addMember($firstname, $lastname, $address)
+    public function addRoom($roomname, $price, $img)
     {
-        $sql = "INSERT INTO members (firstname, lastname, address) VALUES ('$firstname', '$lastname', '$address')";
+        $sql = "INSERT INTO rooms (roomName, price, image) VALUES ('$roomname', '$price', '$img')";
         $result = mysqli_query($this->connect, $sql);
         mysqli_free_result($result);
         return $result;
     }
 
-    public function updateMember($id, $firstname, $lastname, $address)
+    public function updateRoom($id, $roomname, $price, $img)
     {
-        $sql = "UPDATE members SET firstname = '$firstname', lastname = '$lastname', address = '$address' WHERE id = '$id'";
+        $sql = "UPDATE rooms SET roomName = '$roomname', price = '$price', image = '$img' WHERE id = '$id'";
         $result = mysqli_query($this->connect, $sql);
         mysqli_free_result($result);
         return $result;
     }
 
-    public function deleteMember($id)
+    public function deleteRoom($id)
     {
-        $sql = "DELETE FROM members WHERE id = '$id'";
+        $sql = "DELETE FROM rooms WHERE id = '$id'";
         $result = mysqli_query($this->connect, $sql);
         mysqli_free_result($result);
         return $result;

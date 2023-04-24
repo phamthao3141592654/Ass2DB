@@ -41,71 +41,69 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Address</th>
+                        <th>RoomName</th>
+                        <th>Price</th>
+                        <th>Img</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($data['members'] as $member): ?>
+                    <?php foreach ($data['rooms'] as $room): ?>
                         <tr>
                             <td>
-                                <?php echo $member['id']; ?>
+                                <?php echo $room['id']; ?>
                             </td>
                             <td>
-                                <?php echo $member['firstname']; ?>
+                                <?php echo $room['roomName']; ?>
                             </td>
                             <td>
-                                <?php echo $member['lastname']; ?>
+                                <?php echo $room['price']; ?>
                             </td>
                             <td>
-                                <?php echo $member['address']; ?>
+                                <?php echo $room['image']; ?>
                             </td>
                             <td>
-                                <!-- <a href="http://localhost/Assignment2/Admin/viewDetail/<?php echo $member['id']; ?>"
-                                    class="btn btn-primary">View</a> -->
-                                <!-- <a href="#" class="btn btn-primary btn-outline-primary"
-                                    data-toggle="modal">Edit</a>
-                                <a href="" class="btn btn-white"
-                                    data-toggle="modal">Delete</a> -->
-                                <a href="#edit_<?php echo $member['id']; ?>" class="btn btn-success btn-sm"
+                                <a href="http://localhost/Assignment2/Admin/viewDetail/<?php echo $room['id']; ?>"
+                                    class="btn btn-primary">View</a>
+
+                                <a href="#edit_<?php echo $room['id']; ?>" class="btn btn-success btn-sm"
                                     data-toggle="modal"> Edit</a>
-                                <a href="#delete_<?php echo $member['id']; ?>" class="btn btn-danger btn-sm"
+
+                                <a href="#delete_<?php echo $room['id']; ?>" class="btn btn-danger btn-sm"
                                     data-toggle="modal"> Delete</a>
                             </td>
                             <!-- Edit Modal -->
-                            <div class="modal fade" id="edit_<?php echo $member['id']; ?>" tabindex="-1"
+                            <div class="modal fade" id="edit_<?php echo $room['id']; ?>" tabindex="-1"
                                 aria-labelledby="ModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-dark" id="ModalLabel">Edit Member</h5>
+                                            <h5 class="modal-title text-dark" id="ModalLabel">Edit room</h5>
                                             <button type="button" class="close" data-dismiss="modal"
                                                 aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         </div>
                                         <div class="modal-body">
                                             <form method="POST"
-                                                action="http://localhost/Assignment2/Admin/EditMember/<?php echo $member['id']; ?>">
+                                                action="http://localhost/Assignment2/Admin/EditRoom/<?php echo $room['id']; ?>">
                                                 <div class="mb-3 row">
-                                                    <label class="col-sm-2 col-form-label">Firstname</label>
+                                                    <label class="col-sm-2 col-form-label">Room</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="" name="firstname"
-                                                            value="<?php echo $member['firstname']; ?>">
+                                                        <input type="text" class="form-control-plaintext" name="roomname"
+                                                            value="<?php echo $room['roomName']; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label class="col-sm-2 col-form-label">Lastname</label>
+                                                    <label class="col-sm-2 col-form-label">Price</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="" name="lastname"
-                                                            value="<?php echo $member['lastname']; ?>">
+                                                        <input type="text" class="form-control-plaintext" name="price"
+                                                            value="<?php echo $room['price']; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label class="col-sm-2 col-form-label">Address</label>
+                                                    <label class="col-sm-2 col-form-label">Img</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="" name="address"
-                                                            value="<?php echo $member['address']; ?>">
+                                                        <input type="text" class="form-control-plaintext" name="img"
+                                                            value="<?php echo $room['image']; ?>">
                                                     </div>
                                                 </div>
                                         </div>
@@ -120,25 +118,25 @@
                             </div>
 
                             <!-- Delete Modal -->
-                            <div class="modal fade" id="delete_<?php echo $member['id']; ?>" tabindex="-1"
+                            <div class="modal fade" id="delete_<?php echo $room['id']; ?>" tabindex="-1"
                                 aria-labelledby="ModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-dark" id="ModalLabel">Delete Member</h5>
+                                            <h5 class="modal-title text-dark" id="ModalLabel">Delete room</h5>
                                             <button type="button" class="close" data-dismiss="modal"
                                                 aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         </div>
                                         <div class="modal-body">
                                             <p class="text-center">Are you sure you want to Delete</p>
                                             <h2 class="text-center text-dark">
-                                                <?php echo $member['firstname'] . ' ' . $member['lastname']; ?>
+                                                <?php echo $room['roomName'] . ' ' . $room['price']; ?>
                                             </h2>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <a href="http://localhost/Assignment2/Admin/deleteMember/<?php echo $member['id']; ?>"
+                                            <a href="http://localhost/Assignment2/Admin/deleteRoom/<?php echo $room['id']; ?>"
                                                 class="btn btn-danger">
                                                 Yes</a>
                                         </div>
@@ -162,23 +160,23 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="http://localhost/Assignment2/Admin/addMember">
+                            <form method="POST" action="http://localhost/Assignment2/Admin/addRoom">
                                 <div class="mb-3 row">
-                                    <label class="col-sm-2 col-form-label">Firstname</label>
+                                    <label class="col-sm-2 col-form-label">Room</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="" name="firstname">
+                                        <input type="text" class="form-control-plaintext" name="roomname">
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label class="col-sm-2 col-form-label">Lastname</label>
+                                    <label class="col-sm-2 col-form-label">Price</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="" name="lastname">
+                                        <input type="text" class="form-control-plaintext" name="price">
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label class="col-sm-2 col-form-label">Address</label>
+                                    <label class="col-sm-2 col-form-label">Img</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="" name="address">
+                                        <input type="text" class="form-control-plaintext" name="img">
                                     </div>
                                 </div>
                         </div>

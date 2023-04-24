@@ -4,88 +4,78 @@ class Admin extends Controller
     public function show()
     {
         $adminModel = $this->model("AdminModel");
-        // $rooms = $adminModel->getRooms();
-
-        // $this->view("content_layout", [
-        //     "page" => "admin",
-        //     "rooms" => $rooms
-        // ]);
-
-        $members = $adminModel->getMembers();
+        $rooms = $adminModel->getRooms();
 
         $this->view("content_layout", [
             "page" => "admin",
-            "members" => $members
+            "rooms" => $rooms
         ]);
     }
 
-    // function viewDetail($id)
-    // {
-    //     $adminModel = $this->model("AdminModel");
-    //     $room = $adminModel->getRoomById($id);
+    public function viewDetail($id)
+    {
+        $adminModel = $this->model("AdminModel");
+        $room = $adminModel->getRoomById($id);
 
-    //     $this->view("content_layout", [
-    //         "page" => "detail",
-    //         "room" => $room
-    //     ]);
-    // }
+        $this->view("content_layout", [
+            "page" => "detail",
+            "room" => $room
+        ]);
+    }
 
-    function addMember()
+    public function addRoom()
     {
         if (isset($_POST['add'])) {
 
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $address = $_POST['address'];
+            $roomname = $_POST['roomname'];
+            $price = $_POST['price'];
+            $img = $_POST['img'];
 
             $adminModel = $this->model("AdminModel");
-            $res = $adminModel->addMember($firstname, $lastname, $address);
+            $res = $adminModel->addRoom($roomname, $price, $img);
 
             if ($res) {
-                echo "Add success";
+                echo "<script>alert('Add Success')</script>";
                 header("Location: http://localhost/Assignment2/Admin");
             } else {
-                echo "Add fail";
+                echo "<script>alert('Add fail')</script>";
+
             }
         }
     }
 
-    function EditMember($id)
+    public function EditRoom($id)
     {
         if (isset($_POST['edit'])) {
 
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $address = $_POST['address'];
+            $roomname = $_POST['roomname'];
+            $price = $_POST['price'];
+            $img = $_POST['img'];
 
-            // echo $id;
-            // echo $firstname;
-            // echo $lastname;
-            // echo $address;
             $adminModel = $this->model("AdminModel");
-            $res = $adminModel->updateMember($id, $firstname, $lastname, $address);
+            $res = $adminModel->updateRoom($id, $roomname, $price, $img);
 
 
             if ($res) {
-                echo "Update success";
+                echo "<script>alert('Update Success')</script>";
                 header("Location: http://localhost/Assignment2/Admin");
             } else {
-                echo "Update fail";
+                echo "<script>alert('Update Fail')</script>";
             }
         }
     }
 
     // delete member
-    function deleteMember($id)
+    public function deleteRoom($id)
     {
         $adminModel = $this->model("AdminModel");
-        $res = $adminModel->deleteMember($id);
+        $res = $adminModel->deleteRoom($id);
 
         if ($res) {
-            echo "Delete success";
+            echo "<script>alert('Delete Success')</script>";
             header("Location: http://localhost/Assignment2/Admin");
         } else {
-            echo "Delete fail";
+            echo "<script>alert('Delete Fail')</script>";
         }
     }
 }

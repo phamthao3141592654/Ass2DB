@@ -50,7 +50,8 @@
                     <div class="container-wrap">
                         <div class="row no-gutters d-md-flex align-items-center">
                             <div class="col-md-12 appointment ftco-animate">
-                                <form action="LogIn" class="appointment-form" method="POST">
+                                <form action="http://localhost/Assignment2/Login/login" class="appointment-form"
+                                    method="POST">
                                     <div class="d-md-flex">
                                         <div class="form-group">
                                             <input type="text" class="form-control" placeholder="Username" value=""
