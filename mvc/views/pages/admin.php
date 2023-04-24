@@ -29,39 +29,171 @@
 <section class="ftco-section">
     <div class="container">
         <div class="row d-flex">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+            <div class="col-md-6 pr-md-5">
+                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#addnew">ADD NEW</a>
+            </div>
+            <div class="col-md-6 pr-md-5">
+                <div class="heading-section text-md-right ftco-animate">
+                    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search">
+                </div>
+            </div>
             <table class="table table-striped table-dark" id="myTable">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th>ID</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Address</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    <?php foreach ($data['members'] as $member): ?>
+                        <tr>
+                            <td>
+                                <?php echo $member['id']; ?>
+                            </td>
+                            <td>
+                                <?php echo $member['firstname']; ?>
+                            </td>
+                            <td>
+                                <?php echo $member['lastname']; ?>
+                            </td>
+                            <td>
+                                <?php echo $member['address']; ?>
+                            </td>
+                            <td>
+                                <!-- <a href="http://localhost/Assignment2/Admin/viewDetail/<?php echo $member['id']; ?>"
+                                    class="btn btn-primary">View</a> -->
+                                <!-- <a href="#" class="btn btn-primary btn-outline-primary"
+                                    data-toggle="modal">Edit</a>
+                                <a href="" class="btn btn-white"
+                                    data-toggle="modal">Delete</a> -->
+                                <a href="#edit_<?php echo $member['id']; ?>" class="btn btn-success btn-sm"
+                                    data-toggle="modal"> Edit</a>
+                                <a href="#delete_<?php echo $member['id']; ?>" class="btn btn-danger btn-sm"
+                                    data-toggle="modal"> Delete</a>
+                            </td>
+                            <!-- Edit Modal -->
+                            <div class="modal fade" id="edit_<?php echo $member['id']; ?>" tabindex="-1"
+                                aria-labelledby="ModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-dark" id="ModalLabel">Edit Member</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST"
+                                                action="http://localhost/Assignment2/Admin/EditMember/<?php echo $member['id']; ?>">
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Firstname</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="" name="firstname"
+                                                            value="<?php echo $member['firstname']; ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Lastname</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="" name="lastname"
+                                                            value="<?php echo $member['lastname']; ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-2 col-form-label">Address</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="" name="address"
+                                                            value="<?php echo $member['address']; ?>">
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" name="edit" class="btn btn-primary"> Update</a>
+                                                </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Delete Modal -->
+                            <div class="modal fade" id="delete_<?php echo $member['id']; ?>" tabindex="-1"
+                                aria-labelledby="ModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-dark" id="ModalLabel">Delete Member</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="text-center">Are you sure you want to Delete</p>
+                                            <h2 class="text-center text-dark">
+                                                <?php echo $member['firstname'] . ' ' . $member['lastname']; ?>
+                                            </h2>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <a href="http://localhost/Assignment2/Admin/deleteMember/<?php echo $member['id']; ?>"
+                                                class="btn btn-danger">
+                                                Yes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
+
+            <!-- Add New Modal -->
+            <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title text-dark">Add New</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="http://localhost/Assignment2/Admin/addMember">
+                                <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Firstname</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="" name="firstname">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Lastname</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="" name="lastname">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Address</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="" name="address">
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="add" class="btn btn-primary"><span
+                                    class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </section>
 
 <script>
